@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Image Comparison slider</title>
+</head>
+<body class="bg-dark text-light container">
+    <main>
+        <h1 class="display-3">Compare two images side by side</h1>
+        <p class="">Move the slider to compare two images:</p>
+            <div class="images-container border border-4 mb-4" id="images-container">
+                <div class="image bg-light rounded-1" id="image-1-container">
+                    <img src="https://picsum.photos/800/600" id="image_1" height="525px">
+                </div>
+                <div class="image image-overlay" id="image-overlay">
+                    <img src="https://picsum.photos/800/600?grayscale" id="overlay-img" height="525px">
+                </div>
+            </div>
+        <div class="upload">
+            <!-- Upload Button 1 -->
+            <input type="file" id="upload-button-1" hidden>
+            <label class="btn btn-warning" for="upload-button-1">Image 1</label>
+            <span id="file-1-label">No file selected</span>
+            <!-- Upload button 2 -->
+            <input type="file" id="upload-button-2" hidden>
+            <label class="btn btn-warning" for="upload-button-2">Image 2</label>
+            <span id="file-2-label">No file selected</span> 
+
+            <button class="btn btn-danger" type="button" id="reset">Reset slider</button>
+            <button class="btn btn-info" id="border-button">Add border</button>
+            <button class="btn btn-secondary" id="slider-button">Change slider</button>
+        </div>
+    </main>
+    <footer>
+        <p class="copyright">
+            Created by <a href="https://github.com/davidtrikic">david</a>.
+        </p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
