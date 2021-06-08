@@ -17,7 +17,7 @@ window.addEventListener('onload', compareImages(overlayDiv));
 
 function compareImages(imgDiv) {
 
-  // Set the width of overlay image to match the container width on window resize
+  // Set the width of the overlay image to match the container width on window resize
   window.addEventListener('resize', function() {
     overlayImg.style.width = imagesContainer.offsetWidth - border + "px";
 
@@ -25,8 +25,9 @@ function compareImages(imgDiv) {
       imgSlider.style.left = imagesContainer.offsetWidth - (imgSlider.offsetWidth / 2) + "px";
       overlayDiv.style.width = imagesContainer.offsetWidth - border + "px";
   }});
+  
+  let imgSlider, imgDiv_width, imgDiv_height, isClicked = false;
 
-  var imgSlider, imgDiv, isClicked = 0, imgDiv_width, imgDiv_height;
   // Store overlay div width and height
   imgDiv_width = imgDiv.offsetWidth;
   imgDiv_height = imgDiv.offsetHeight;
@@ -34,13 +35,13 @@ function compareImages(imgDiv) {
   imgDiv.style.width = (imgDiv_width / 2) + "px";
   // Create slider
   imgSlider = document.createElement("div");
-////////
   imgSlider.setAttribute("class", "image-slider");
   // Insert slider
   imgDiv.parentElement.insertBefore(imgSlider, imgDiv);
   // Position the slider
   imgSlider.style.top = (imgDiv_height / 2) - (imgSlider.offsetHeight / 2) + "px";
   imgSlider.style.left = (imgDiv_width / 2) - (imgSlider.offsetWidth / 2) + "px";
+
   // Activate slider on mouse click
   imgSlider.addEventListener("mousedown", sliderStart);
   // Deactivacte slider when mouse button is not clicked
@@ -52,6 +53,7 @@ function compareImages(imgDiv) {
 
   sliderButton.addEventListener("click", switchSlider);
 
+  // Switch slider function
   function switchSlider() {
     if (imgSlider.classList.contains('image-slider')) {
       imgSlider.classList.remove('image-slider');
@@ -64,11 +66,12 @@ function compareImages(imgDiv) {
     imgSlider.style.left = imgDiv.offsetWidth - (imgSlider.offsetWidth / 2 + 2) + "px";
   }
 
+  // Listen to mouse move and start slider movement
   function sliderStart(e) {
-    // Prevent any actions on a apge while slider is active
+    // Prevent any actions on a page while slider is active
     e.preventDefault();
     // Set slider state to clicked
-    isClicked = 1;
+    isClicked = true;
     // Execute a function when the slider is moved
     window.addEventListener("mousemove", moveSlider);
     window.addEventListener("touchmove", moveSlider);
@@ -76,13 +79,13 @@ function compareImages(imgDiv) {
 
   // Stop the slider if the button is no longer clicked
   function sliderStop() {
-    isClicked = 0;
+    isClicked = false;
   }
-
+  // Function that moves the slider
   function moveSlider(e) {
- 
+
     // Exit the function if the slider is no longer clicked
-    if (isClicked == 0) return false;
+    if (isClicked == false) return false;
     // Get the cursor's X position
     // If the type of event is mousemove get cursor position, if not get touch position
     if(e.type == "mousemove") {
@@ -99,7 +102,7 @@ function compareImages(imgDiv) {
   }
 
   function getTouchPos(e) {
-    var a, x, y = 0;
+    let a, x, y = 0;
     e = e || window.event;
     // Get the coordinates of the overlay div element
     a = imgDiv.getBoundingClientRect();
@@ -111,7 +114,7 @@ function compareImages(imgDiv) {
   }
 
   function getCursorPos(e) {
-    var a, x, y = 0;
+    let a, x = 0;
     e = e || window.event;
     // Get the coordinates of the overlay div element
     a = imgDiv.getBoundingClientRect();
@@ -137,8 +140,6 @@ const button_2 = document.getElementById('upload-button-2');
 
 // Execute the function on page load
 window.addEventListener('load', imageUpload());
-
-
 
 // Image Upload function
 function imageUpload() {
